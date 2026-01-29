@@ -29,8 +29,7 @@ def classify_triangle(a: Number, b: Number, c: Number) -> str:
     else:
         tri_type = "Scalene"
 
-    # Right-triangle check: x^2 + y^2 == z^2 (with tolerance)
-    # Use a slightly larger tolerance than default to avoid float noise in tests
+
     tol = 1e-9
     is_right = abs((x * x + y * y) - (z * z)) <= tol * max(1.0, z * z)
 
