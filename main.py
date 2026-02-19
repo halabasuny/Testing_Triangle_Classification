@@ -1,3 +1,8 @@
+"""
+Triangle classification module.
+
+This module provides functionality to classify triangles based on their side lengths.
+"""
 from __future__ import annotations
 from typing import Union
 import math
@@ -5,11 +10,35 @@ import math
 Number = Union[int, float]
 
 def _is_number(x) -> bool:
+    """
+    Check if a value is a valid number (int or float, excluding bool).
+
+    Args:
+        x: The value to check.
+
+    Returns:
+        True if x is an int or float (but not a bool), False otherwise.
+    """
     # bool is a subclass of int; treat True/False as invalid side lengths
     return isinstance(x, (int, float)) and not isinstance(x, bool)
 
 def classify_triangle(a: Number, b: Number, c: Number) -> str:
-  
+    """
+    Classify a triangle based on its side lengths.
+
+    Classifies triangles as NotATriangle (invalid), Equilateral, Isosceles, Scalene,
+    and optionally appends "Right" if it's a right triangle.
+
+    Args:
+        a: First side length.
+        b: Second side length.
+        c: Third side length.
+
+    Returns:
+        A string describing the triangle type: "NotATriangle", "Equilateral",
+        "Isosceles", "Scalene", "Equilateral Right", "Isosceles Right",
+        or "Scalene Right".
+    """
     # Validate inputs
     if not (_is_number(a) and _is_number(b) and _is_number(c)):
         return "NotATriangle"
@@ -28,7 +57,6 @@ def classify_triangle(a: Number, b: Number, c: Number) -> str:
         tri_type = "Isosceles"
     else:
         tri_type = "Scalene"
-
 
     tol = 1e-9
     is_right = abs((x * x + y * y) - (z * z)) <= tol * max(1.0, z * z)
